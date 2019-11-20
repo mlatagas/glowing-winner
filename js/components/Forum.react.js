@@ -1,21 +1,7 @@
 var Forum = React.createClass({
   getInitialState: function() {
     return {
-      allAnswers: {
-        "1": {
-          body: "Isn't that about time travel?",
-          correct: false
-        },
-        "2": {
-          body:
-            "React and Flux are a tool and methodologies for building the front end of web applications.",
-          correct: false
-        },
-        "3": {
-          body: "React is a synonym for 'respond'",
-          correct: false
-        }
-      }
+      allAnswers: ForumStore.getAnswers()
     };
   },
 
@@ -35,9 +21,12 @@ var Forum = React.createClass({
     );
   },
   _onAddAnswer: function(answerText) {
+    ForumActions.addNewAnswer(answerText);
+  },
+  _onMarkCorrect: function(id) {
     ForumDispatcher.dispatch({
-      actionType: "FORUM_ANSWER_ADDED",
-      newAnswer: answerText
+      actionType: "FORUM_ANSWER_MARKED_CORRECT",
+      id: id
     });
   }
 });

@@ -10,6 +10,7 @@ var ForumAddBox = React.createClass({
   },
 
   _onChange: function(event) {
+    console.log("publishing event: " + event.target.value);
     this.setState({
       value: event.target.value
     });
