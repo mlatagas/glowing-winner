@@ -5,21 +5,37 @@ var ForumAnswer = React.createClass({
   },
 
   _markCorrect: function() {
+    console.log("Marking " + this.props.id + " as correct.");
     this.props.onMarkCorrect(this.props.id);
   },
 
   render: function() {
     var answer = this.props.answer;
 
-    return (
-      <div className="panel panel-default">
-        <div className="panel-body">{answer.body}</div>
+    var markAnswer;
+
+    if (!answer.correct) {
+      markAnswer = (
         <div className="pull-right">
           <small>
-            <a href="#" onMarkCorrect={this._markCorrect}>
+            <a href="#" onClick={this._markCorrect}>
               Mark as correct
             </a>
           </small>
+        </div>
+      );
+    }
+
+    var classNames = "panel-body";
+    if (answer.correct) {
+      classNames += " bg-success";
+    }
+
+    return (
+      <div className="panel panel-default">
+        <div className={classNames}>
+          {answer.body}
+          {markAnswer}
         </div>
       </div>
     );
