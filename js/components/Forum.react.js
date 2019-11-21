@@ -21,7 +21,11 @@ var Forum = React.createClass({
     );
   },
   _onAddAnswer: function(answerText) {
-    ForumActions.addNewAnswer(answerText);
+    console.log("Adding answer: " + answerText);
+    ForumDispatcher.dispatch({
+      actionType: "FORUM_ANSWER_ADDED",
+      newAnswer: answerText
+    });
   },
   _onMarkCorrect: function(id) {
     ForumDispatcher.dispatch({

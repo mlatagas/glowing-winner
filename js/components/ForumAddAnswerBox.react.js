@@ -6,7 +6,7 @@ var ForumAddBox = React.createClass({
   },
 
   _addAnswer: function() {
-    this.props.onAddAnswer();
+    this.props.onAddAnswer(this.state.value);
   },
 
   _onChange: function(event) {
