@@ -15,16 +15,28 @@ var answerData = {
 };
 
 var ForumStore = new EventEmitter();
+
+ForumStore.emitChange = function() {
+  this.emit("change");
+};
+
+ForumStore.addChangeListener = function(listener) {
+  console.log("Adding listener: " + JSON.stringify(listener));
+
+  this.on("change", listener);
+};
+
 ForumStore.getAnswers = function() {
   return answerData;
 };
 
 ForumStore.addAnswer = function(newAnswer) {
-  console.log(newAnswer);
+  console.log("FromStore.AddAnswer: adding answer " + newAnswer);
   answerData[Object.keys(answerData).length + 1] = {
     body: newAnswer,
     correct: false
   };
+  this.emitChange();
 };
 
 ForumStore.markAsCorrect = function(id) {
@@ -32,9 +44,12 @@ ForumStore.markAsCorrect = function(id) {
     answerData[key].correct = false;
   }
   answerData[id].correct = true;
+  this.emitChange();
 };
 
 ForumDispatcher.register(function(action) {
+  console.log("Inside register dispatcher..");
+
   switch (action.actionType) {
     case "FORUM_ANSWER_ADDED": {
       console.log("Answer added!");

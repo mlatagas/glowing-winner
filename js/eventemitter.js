@@ -3,6 +3,7 @@ function EventEmitter() {
 }
 
 EventEmitter.prototype.on = function(type, listener) {
+  console.log("Adding listener: " + listener);
   this._events[type] = this._events[type] || [];
   this._events[type].push(listener);
 };

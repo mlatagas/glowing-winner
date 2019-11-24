@@ -1,4 +1,4 @@
-var ForumAddBox = React.createClass({
+var ForumAddAnswerBox = React.createClass({
   getInitialState: function() {
     return {
       value: ""
@@ -10,7 +10,6 @@ var ForumAddBox = React.createClass({
   },
 
   _onChange: function(event) {
-    console.log("publishing event: " + event.target.value);
     this.setState({
       value: event.target.value
     });
